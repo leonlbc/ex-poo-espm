@@ -1,31 +1,49 @@
 
 public class Funcionario {
 
-	String nome;
-	String cpf;
-	double salario;
-	static double valeRef = 550.00;
+	private String nome;
+	private String cpf;
+	private double salario;
+	private static double valeRef = 550.00;
 	
+	public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
 	public String retornarDados() {
-		return "{Nome do funcionario: " + nome + " | CPF: " + cpf + " | Salario: " + salario +  " | Vale Refeição: " + valeRef + "}"; 
-		
+		return "{Nome : " + getNome()
+		+ ", CPF: " + getCpf() + ", Salario: "
+		+ getSalario() +  ", Vale Refeicao: " + valeRef + "}"; 
 	}
 	
-	public void aumentarSalario(double porcentagemSalario) {
-		
+    public void aumentarSalario(double porcentagemSalario) {
 		porcentagemSalario = 1 + (porcentagemSalario/100);
-		salario = salario * porcentagemSalario; 
-		
-		
+		setSalario(getSalario() * porcentagemSalario); 
 	}
 	
 	public static void ajustarValeRefeicao(double porcentagemValeRef) {
-		 
 		porcentagemValeRef = 1 + (porcentagemValeRef/100);
-		valeRef = valeRef * porcentagemValeRef; 
-		
-		
+		valeRef = valeRef * porcentagemValeRef;
 	}
-	
 	
 }

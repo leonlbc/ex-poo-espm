@@ -1,6 +1,14 @@
 
 public class CartaoDeCredito {
 
-	 String num_cartao; 
+	private String numero;
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	} 
 	
 }
