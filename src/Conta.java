@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Conta {
 
 	private int numero;
 	private double saldo;
 	private double limite;
-	private String extrato;
+	private List<Lancamento> extrato = new ArrayList<Lancamento>();
 	
 	public double getLimite() {
         return limite;
@@ -36,36 +40,35 @@ public class Conta {
 				+ ", Saldo: " + getSaldo() + "}"; 
 	}
 
-	public void sacar(double valor) {
-		 
-	if(valor < getLimite()) {
-		if (valor <= getSaldo()) {
-			setSaldo(getSaldo() - valor);
-			extrato += "Saque de " + valor;
-			
+	public void sacar(double valor) { 
+		if(valor < getLimite()) {
+			if (valor <= getSaldo()) {
+				setSaldo(getSaldo() - valor);
+				extrato.add(new Lancamento(valor));
+			}else {
+				System.out.println("Saldo indisponivel");
+			}
 		}else {
-			System.out.println("Saldo indisponivel");
+			System.out.println("Limite Excedido");
 		}
-		
-	}
-	else {
-		System.out.println("Limite Excedido");
-	}
 	}
 	
 	public void depositar(double valor) {
-		 
 		setSaldo(getSaldo() + valor);
-		extrato += "Deposito de " + valor;
+		extrato.add(new Lancamento(valor));
 	}
 	
 	public double consultarSaldoDisponivel() {
 		return getSaldo();
-
 	}
 	
-	public String gerarExtrato() {	
+	public List<Lancamento> gerarExtrato() {	
 		return extrato;	 
+	}
+
+	public String gerarExtrato(int dias) {
+		//String extrato_str = extrato.stream();
+		return "acabar"; //extrato_str;	 
 	}
 	
 	public void transferir(Conta destino, double valor) {

@@ -5,24 +5,21 @@ public class Lancamento {
     private double valor;
     private Calendar dia;
 
-    public Lancamento(double valor, Calendar dia) {
-        this.setValor(valor);
-        this.setDia(Calendar.getInstance());
+    public Lancamento(double valor) {
+        this.valor = valor;
+        this.dia = Calendar.getInstance();
     }
 
     public Calendar getDia() {
         return dia;
     }
 
-    public void setDia(Calendar dia) {
-        this.dia = dia;
-    }
-
     public double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    @Override
+    public String toString() {
+        return "Movimentacao de R$" + valor + " no Dia " + dia.toString();
     }
 }
