@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Conta {
@@ -46,10 +45,10 @@ public class Conta {
 				setSaldo(getSaldo() - valor);
 				extrato.add(new Lancamento(valor));
 			}else {
-				System.out.println("Saldo indisponivel");
+				System.err.println("Saldo indisponivel");
 			}
 		}else {
-			System.out.println("Limite Excedido");
+			System.err.println("Limite Excedido");
 		}
 	}
 	
@@ -62,13 +61,19 @@ public class Conta {
 		return getSaldo();
 	}
 	
-	public List<Lancamento> gerarExtrato() {	
-		return extrato;	 
+	public String gerarExtrato() {
+		String extrato_resumo = "\n\n--Extrato-- \n\n";
+		extrato_resumo += extrato.stream().map(Lancamento::toString).collect(Collectors.joining());
+		extrato_resumo += "\n------------\n";
+		return extrato_resumo;	 
 	}
 
 	public String gerarExtrato(int dias) {
-		//String extrato_str = extrato.stream();
-		return "acabar"; //extrato_str;	 
+		String extrato_dias = "\n\n--Extrato--" + " (Ultimos " + dias + " Dias)\n\n";
+		extrato_dias += extrato.stream().filter((l) -> l.passouDias(dias))
+							.map(Lancamento::toString).collect(Collectors.joining());
+		extrato_dias += "\n------------\n";
+		return extrato_dias;	 
 	}
 	
 	public void transferir(Conta destino, double valor) {

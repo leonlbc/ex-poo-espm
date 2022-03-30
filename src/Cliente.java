@@ -6,7 +6,7 @@ public class Cliente {
 	CartaoDeCredito cartaoDeCredito = new CartaoDeCredito();	
 	
 	public String retornarDados() {
-		return "{Nome:" + nome + ", CPF: " + cpf +  
+		return "Cliente {Nome : " + nome + ", CPF: " + cpf +  
 	               ", Conta: " + conta.retornarDados() +  
 	               ", Numero do Cartao: " +  cartaoDeCredito.getNumero() + "}"; 
 	}

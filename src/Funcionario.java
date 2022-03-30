@@ -31,7 +31,7 @@ public class Funcionario {
     }
 
 	public String retornarDados() {
-		return "{Nome : " + getNome()
+		return "Funcionario {Nome : " + getNome()
 		+ ", CPF: " + getCpf() + ", Salario: "
 		+ getSalario() +  ", Vale Refeicao: " + valeRef + "}"; 
 	}

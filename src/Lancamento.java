@@ -18,8 +18,16 @@ public class Lancamento {
         return valor;
     }
 
+    public boolean passouDias(int dias){
+        int dias_passados = Calendar.DAY_OF_MONTH - dia.get(Calendar.DAY_OF_MONTH);
+        if (dias_passados < dias) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
-        return "Movimentacao de R$" + valor + " no Dia " + dia.toString();
+        return "Dia " + dia.get(Calendar.DAY_OF_MONTH) +": R$" + valor + "\n";
     }
 }
