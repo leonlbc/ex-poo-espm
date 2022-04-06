@@ -4,32 +4,34 @@ import java.util.stream.Collectors;
 
 public class Conta {
 
+	private Cliente cliente;
 	private int numero;
 	private double saldo;
 	private double limite;
 	private List<Lancamento> extrato = new ArrayList<Lancamento>();
 	
+	public Conta(Cliente cliente){
+		this.cliente = cliente;
+	}
+
 	public double getLimite() {
         return limite;
-    }
-
-    public void setLimite(double limite) {
-        this.limite = limite;
     }
 
     public double getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-
 	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public Cliente getCliente() {
+        return cliente;
+    }
+
+	public void setDados(int numero, int limite) {
+		this.limite = limite;
 		this.numero = numero;
 	}
 
@@ -42,7 +44,7 @@ public class Conta {
 	public void sacar(double valor) { 
 		if(valor < getLimite()) {
 			if (valor <= getSaldo()) {
-				setSaldo(getSaldo() - valor);
+				this.saldo -= valor;
 				extrato.add(new Lancamento(valor));
 			}else {
 				System.err.println("Saldo indisponivel");
@@ -53,7 +55,7 @@ public class Conta {
 	}
 	
 	public void depositar(double valor) {
-		setSaldo(getSaldo() + valor);
+		this.saldo += valor;
 		extrato.add(new Lancamento(valor));
 	}
 	
@@ -77,8 +79,10 @@ public class Conta {
 	}
 	
 	public void transferir(Conta destino, double valor) {
-		setSaldo(getSaldo() - valor);
-        destino.setSaldo(destino.getSaldo() + valor);
+		if (this.saldo >= valor) {
+			this.saldo -= valor;
+			destino.depositar(valor);
+		}
 	}
 	
 }
